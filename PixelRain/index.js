@@ -6,6 +6,7 @@ img.src = "owl.png";
 
 let brightnessArray = [];
 let particlesArray = [];
+let rgbArray = [];
 
 class Particle {
   constructor() {
@@ -30,7 +31,8 @@ class Particle {
 
   draw() {
     ctx.beginPath();
-    ctx.fillStyle = 'white'
+    ctx.fillStyle =
+      rgbArray[Math.floor(this.y - 1) * canvas.width + Math.floor(this.x)];
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     ctx.fill();
   }
@@ -49,7 +51,7 @@ img.onload = function () {
     const blue = imgData.data[i * 4 + 2];
     const brightness = (red + green + blue) / 3;
     brightnessArray.push(brightness);
-    
+    rgbArray.push(`rgb(${red}, ${green}, ${blue})`);
   }
 
   // generate 10000 perticles
